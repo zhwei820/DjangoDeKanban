@@ -163,6 +163,5 @@ export default {
     border-color: #000;
     border-width: 2px;
     border-style: solid;
-    border-radius: 25px 25px 55px 5px/5px 55px 25px 25px;
   }
 </style>
