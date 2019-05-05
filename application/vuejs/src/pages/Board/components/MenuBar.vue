@@ -61,10 +61,27 @@ export default {
       });
     },
     deleteBoardAction() {
-      if (!window.confirm('Are you sure?')) return;
-      this.deleteBoard({
-        boardId: this.boardData.boardId,
-      });
+
+      this.$confirm('此操作将永久删除, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.deleteBoard({
+            boardId: this.boardData.boardId,
+          });
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });          
+        });
+      
+
     },
     ...mapActions([
       'setSearchWord',

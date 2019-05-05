@@ -17,13 +17,24 @@ const { mapActions } = createNamespacedHelpers('home');
 export default {
   name: 'BoardCard',
   methods: {
-    addBoardAction() {
-      const boardName = window.prompt('BoardName?');
-      if (boardName) {
+    addBoardAction() { 
+      this.$prompt('请输入 BoardName', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
         this.addBoard({
-          boardName,
+          boardName: value,
         });
-      }
+        this.$message({
+          type: 'success',
+          message: '你的boardName是: ' + boardName
+        });
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });       
+      });
     },
     ...mapActions(['addBoard']),
   },
