@@ -27,9 +27,10 @@ export default {
         });
         this.$message({
           type: 'success',
-          message: '你的boardName是: ' + boardName
+          message: '你的boardName是: ' + value
         });
-      }).catch(() => {
+      }).catch((e) => {
+        console.log(e)
         this.$message({
           type: 'info',
           message: '取消输入'

@@ -74,7 +74,7 @@ export default {
         boardId: this.boardId,
         cardId: this.cardId,
       });
-      window.alert('delete succeeded');
+      this.$message('delete succeeded');
       this.close();
     },
     startContentEdit() {

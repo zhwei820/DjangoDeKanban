@@ -92,13 +92,26 @@ export default {
   },
   methods: {
     addCardAction() {
-      const cardTitle = window.prompt('CardTitle?');
-      if (cardTitle) {
+    
+      this.$prompt('请输入 CardTitle', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
         this.addCard({
           pipeLineId: this.pipeLine.pipeLineId,
-          cardTitle,
+          cardTitle: value,
         });
-      }
+        this.$message({
+          type: 'success',
+          message: '你的 cardTitle 是: ' + value
+        });
+      }).catch((e) => {
+        console.log(e)
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });       
+      });
     },
     delPipeLineAction() {
       if (!window.confirm(`DELETE [${this.pipeLineName}] ? Are you sure?`)) return;

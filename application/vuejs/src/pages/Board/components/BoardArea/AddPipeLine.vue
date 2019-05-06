@@ -24,13 +24,28 @@ export default {
   },
   methods: {
     addPipeLineAction() {
-      const pipeLineName = window.prompt('PipeLineName?');
-      if (pipeLineName) {
+
+      this.$prompt('请输入 PipeLineName', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+      }).then(({ value }) => {
         this.addPipeLine({
           boardId: this.boardData.boardId,
-          pipeLineName,
+          pipeLineName: value,
         });
-      }
+        this.$message({
+          type: 'success',
+          message: '你的 PipeLineName 是: ' + value
+        });
+      }).catch((e) => {
+        console.log(e)
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        });       
+      });
+
+
     },
     ...mapActions([
       'addPipeLine',
